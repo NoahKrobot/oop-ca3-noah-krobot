@@ -46,14 +46,35 @@ public class CA3_Question1
             System.out.println("Add a new car: ");
             newCar = key.nextInt();
             if(driveway.contains(newCar)){
-                System.out.println("That car is already in the driveway.");
+                System.out.println("This car is already in the driveway.");
             }else{
                 driveway.add(newCar);
                 runWhile=false;
             }
         }
+    }
+
+    public static void removeCar(){
+        Stack<Integer> driveway = new Stack<Integer>();
+        Scanner key = new Scanner(System.in);
+        boolean runWhile = true;
+
+        while(runWhile){
+            int removeCar = 0;
+            System.out.println("Add a new car: ");
+            removeCar = key.nextInt();
+            if(driveway.contains(removeCar)){
 
 
+
+            }else{
+                System.out.println("This car is not in the driveway.");
+            }
+
+        }
+    }
+
+    public static void lifoProblem(){
 
     }
 }
