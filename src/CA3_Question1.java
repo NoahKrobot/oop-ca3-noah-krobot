@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -6,13 +7,13 @@ import java.util.Stack;
  */
 public class CA3_Question1
 {
+
     public static void runSimulation()
     {
 
     }
 
     public static void main(String[] args) {
-
         runSimulation();
     }
 
@@ -33,8 +34,24 @@ public class CA3_Question1
 
         int newVehicle = 0;
         int topOfDriveway = 0;
+    }
 
+    public static void addCar(){
+        Stack<Integer> driveway = new Stack<Integer>();
+        Scanner key = new Scanner(System.in);
+        boolean runWhile = true;
 
+        while(runWhile){
+            int newCar = 0;
+            System.out.println("Add a new car: ");
+            newCar = key.nextInt();
+            if(driveway.contains(newCar)){
+                System.out.println("That car is already in the driveway.");
+            }else{
+                driveway.add(newCar);
+                runWhile=false;
+            }
+        }
 
 
 
