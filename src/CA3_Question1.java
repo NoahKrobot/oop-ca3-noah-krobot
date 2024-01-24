@@ -65,7 +65,7 @@ public class CA3_Question1
             removeCar = key.nextInt();
             if(driveway.contains(removeCar)){
 
-
+                lifoProblem(removeCar);
 
             }else{
                 System.out.println("This car is not in the driveway.");
@@ -74,7 +74,26 @@ public class CA3_Question1
         }
     }
 
-    public static void lifoProblem(){
+    public static void lifoProblem(int removeCar){
+        int simulationCommand = 0;
+
+        if(driveway.pop() == removeCar){
+            System.out.println("Car has been removed");
+            simulationCommand =  removeCar*-1;
+        }else{
+            for(Integer car: driveway){
+                if(driveway.pop() == car){
+                    if(car != removeCar){
+                        simulationCommand= car*-1;
+                    }else{
+                        break;
+                    }
+                }
+
+            }
+        }
 
     }
+
+
 }
