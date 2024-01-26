@@ -68,7 +68,7 @@ public class CA3_Question1
             }else{
                 driveway.add(newCar);
                 if(street.contains(newCar)){
-                    street.remove(newCar);
+                    street.removeElement(newCar);
                 }
                 System.out.println(newCar+" added to the driveway.");
             }
@@ -76,37 +76,37 @@ public class CA3_Question1
 
 
     public static void removeCar(int removeCar){
-        Scanner key = new Scanner(System.in);
-        boolean runWhile = true;
 
         removeCar=removeCar*-1;
+        boolean runWhile= true;
         System.out.println("remove car: "+removeCar);
 
             if(driveway.contains(removeCar)){
-                driveway.remove(removeCar);
+                System.out.println("This car is in the driveway.");
+
+
+
+
+                while(runWhile){
+                    Iterator<Integer> itr = driveway.iterator();
+                    int lastElement = itr.next();
+                    while(itr.hasNext()){
+                        lastElement = itr.next();
+                    }
+
+                    driveway.removeElement(lastElement);
+                    System.out.println(lastElement +" removed from the driveway.");
+
+                    street.add(lastElement);
+
+
+
+                    if(lastElement == removeCar){
+                         runWhile= false;
+                    }
+                }
             }else{
                 System.out.println("This car is not in the driveway.");
             }
     }
-
-    public static void lifoProblem(int removeCar){
-
-            Iterator<Integer> itr = driveway.iterator();
-            int lastElement = itr.next();
-
-                while(itr.hasNext()){
-                    lastElement = itr.next();
-                }
-
-//            driveway.remove(lastElement);
-//            street.add(lastElement);
-
-//                System.out.println("last element: " + lastElement);
-//                if(lastElement == removeCar){
-//                    driveway.remove(removeCar*-1);
-//                    street.add(removeCar);
-//                }else {
-//
-//                }
-            }
-    }
+}
