@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -13,69 +14,64 @@ public class CA3_Question1
 
     public static void runSimulation()
     {
+        Scanner key = new Scanner(System.in);
         int command = 0;
 
+        int counter =1;
         boolean runWhile=true;
 
         while(runWhile){
+
+
+            System.out.println("\n\n--- STEP "+counter+" ---");
+
+
+            System.out.println("Driveway: ");
+            System.out.println(driveway);
+
+            System.out.println("Street: ");
+            System.out.println(street);
+
+            System.out.println("Enter a number: ");
+            command = key.nextInt();
+
            if(command ==0) {
                runWhile=false;
+
+               System.out.println("Final sets");
                System.out.println("Driveway: ");
                System.out.println(driveway);
 
                System.out.println("Street: ");
                System.out.println(street);
            }
-           if(command <0){
+           if(command < 0){
                removeCar(command);
            }if(command >0){
                addCar(command);
-
             }
-
-
+            counter++;
         }
-
-        System.out.println("Entering a number.");
-
     }
 
     public static void main(String[] args) {
         runSimulation();
     }
 
-    public static void stackOperations(){
-        driveway.push(1);
-        driveway.push(2);
-        driveway.push(3);
-        driveway.push(4);
-        driveway.push(5);
-
-        street.push(-1);
-        street.push(-2);
-        street.push(-3);
-        street.push(-4);
-        street.push(-5);
-
-        int newVehicle = 0;
-        int topOfDriveway = 0;
-    }
 
     public static void addCar(int newCar){
         Scanner key = new Scanner(System.in);
         boolean runWhile = true;
 
-        while(runWhile){
-            newCar = 0;
-            System.out.println("Add a new car: ");
-            newCar = key.nextInt();
             if(driveway.contains(newCar)){
                 System.out.println("This car is already in the driveway.");
             }else{
                 driveway.add(newCar);
-                runWhile=false;
+                if(street.contains(newCar)){
+                    street.remove(newCar);
+                }
+                System.out.println(newCar+" added to the driveway.");
             }
-        }
     }
 
 
@@ -83,39 +79,34 @@ public class CA3_Question1
         Scanner key = new Scanner(System.in);
         boolean runWhile = true;
 
-        while(runWhile){
-            System.out.println("Add a new car: ");
-            removeCar = key.nextInt();
+        removeCar=removeCar*-1;
+        System.out.println("remove car: "+removeCar);
+
             if(driveway.contains(removeCar)){
-
-                lifoProblem(removeCar);
-
+                driveway.remove(removeCar);
             }else{
                 System.out.println("This car is not in the driveway.");
             }
-
-        }
     }
 
     public static void lifoProblem(int removeCar){
-        int simulationCommand = 0;
 
-        removeCar= removeCar*-1;
+            Iterator<Integer> itr = driveway.iterator();
+            int lastElement = itr.next();
 
-        if(driveway.pop() == removeCar){
-            System.out.println("Car has been removed");
-            simulationCommand =  removeCar*-1;
-        }else{
-            for(Integer car: driveway){
-                if(driveway.pop() == car){
-                    if(car != removeCar){
-                        simulationCommand= car*-1;
-                    }else{
-                        break;
-                    }
+                while(itr.hasNext()){
+                    lastElement = itr.next();
                 }
 
+//            driveway.remove(lastElement);
+//            street.add(lastElement);
+
+//                System.out.println("last element: " + lastElement);
+//                if(lastElement == removeCar){
+//                    driveway.remove(removeCar*-1);
+//                    street.add(removeCar);
+//                }else {
+//
+//                }
             }
-        }
     }
-}

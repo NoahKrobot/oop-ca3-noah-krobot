@@ -11,6 +11,17 @@ public class CA3_Question2
         Starter function to create the 2D array and populate it with 0
 
      */
+
+    static class Pair {
+        int row, col;
+
+        Pair(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+
     public static int[][]  floodFillStart() {
         Scanner kb = new Scanner(System.in);
         int[][] arr = new int[10][10];
