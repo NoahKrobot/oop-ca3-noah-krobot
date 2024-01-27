@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  *  Name:
@@ -8,6 +9,8 @@ public class CA3_Question2
 {
 
     static Scanner key = new Scanner(System.in);
+    static Stack<Integer> floodSpaces = new Stack<Integer>();
+    static Stack<Pair> thePair = new Stack<Pair>();
 
 
     public static class Pair {
@@ -57,11 +60,21 @@ public class CA3_Question2
     private static void fill(int r, int c, int[][] arr)
     {
 
-        //1. enter the coordinates
-        //2. find the coordinates in the array
+        //1. enter the coordinates - done
+        //2. find the coordinates in the array - done
         //3. increment the numbers in that row
         //4. set that the numbers in the rows under it have starting point +1
 
+
+        thePair.push(new Pair(r, c));
+        Pair lastPair = thePair.pop();
+
+            int row = lastPair.row;
+            int col = lastPair.collumn;
+
+            if (arr[row][col] == 0) {
+                arr[row][col] = 99;
+            }
 
         display(arr);
     }
@@ -80,7 +93,7 @@ public class CA3_Question2
 
         System.out.println("Starting coordinates are: row " +row +", column "+column+".");
 
-        fill(row+1, column+1, arr);
+        fill(row-1, column-1, arr);
 
 
     }
