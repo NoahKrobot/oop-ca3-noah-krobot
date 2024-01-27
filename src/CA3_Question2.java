@@ -10,7 +10,7 @@ public class CA3_Question2
 
     static Scanner key = new Scanner(System.in);
     static Stack<Integer> floodSpaces = new Stack<Integer>();
-    static Stack<Pair> thePair = new Stack<Pair>();
+    static Stack<Pair> floodStack = new Stack<Pair>();
 
 
     public static class Pair {
@@ -62,21 +62,39 @@ public class CA3_Question2
 
         //1. enter the coordinates - done
         //2. find the coordinates in the array - done
-        //3. increment the numbers in that row
+        //3. increment the numbers in that row - done
         //4. set that the numbers in the rows under it have starting point +1
 
 
-        thePair.push(new Pair(r, c));
-        Pair lastPair = thePair.pop();
+        floodStack.push(new Pair(r, c));
+        Pair lastPair = floodStack.pop();
 
             int row = lastPair.row;
             int col = lastPair.collumn;
 
+
             if (arr[row][col] == 0) {
-                arr[row][col] = 99;
+                arr[row][col] = 1;
+                pushUnfilledNeighbors(floodStack, arr, row, col, lastPair);
             }
 
         display(arr);
+    }
+
+
+    private static void pushUnfilledNeighbors(Stack<Pair> stack, int[][] arr, int row, int col, Pair lastPair) {
+        int incrementInt = 2;
+        for (int i = 0; i < 20; i++) {
+            col++;
+            stack.push(new Pair(row, col));
+            arr[row][col] = incrementInt;
+            incrementInt++;
+            if(col==9){
+                break;
+            }
+        }
+
+
     }
 
     public static void start()
