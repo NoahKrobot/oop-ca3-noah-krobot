@@ -3,8 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
- *  Name:
- *  Class Group:
+ *  Name: Noah Krobot
+ *  Class Group: SD2B
  */
 
 public class CA3_Question3
@@ -28,14 +28,12 @@ public class CA3_Question3
             singleLine = key.nextLine().trim();
             lineNumb++;
 
-            if (!singleLine.isEmpty()) { //I added this so empty lines are skipped.
+            //I added this so empty lines are skipped.
+            if (!singleLine.isEmpty()) {
                 numberedLinesMap.put(lineNumb, singleLine);
             }
         }
-
         Set<Integer> keySet = numberedLinesMap.keySet();
-
-
         for (Integer oneKey : keySet) {
                 String value = numberedLinesMap.get(oneKey);
                 System.out.println("Line " + oneKey + ": " +  value+ "\n");

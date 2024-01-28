@@ -3,9 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
 /**
- *  Name:
- *  Class Group:
+ *  Name: Noah Krobot
+ *  Class Group: SD2B
  */
+
 public class CA3_Question4 {
 
     /*

@@ -3,9 +3,10 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- *  Name:
- *  Class Group:
+ *  Name: Noah Krobot
+ *  Class Group: SD2B
  */
+
 public class CA3_Question1
 {
     static Stack<Integer> driveway = new Stack<Integer>();

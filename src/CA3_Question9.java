@@ -1,7 +1,8 @@
 /**
- *  Name:
- *  Class Group:
+ *  Name: Noah Krobot
+ *  Class Group: SD2B
  */
+
 
 /*
 Direction enum used to indicate direction.
