@@ -71,8 +71,6 @@ public class CA3_Question2
 
             int row = lastPair.row;
             int col = lastPair.collumn;
-
-
             if (arr[row][col] == 0) {
                 arr[row][col] = 1;
                 pushUnfilledNeighbors(floodStack, arr, row, col, lastPair);
@@ -96,7 +94,10 @@ public class CA3_Question2
             for (int i = 0; i < 10; i++) {
                 col++;
                 stack.push(new Pair(row, col));
-                arr[row][col] = incrementInt;
+
+                if(arr[row][col] == 0){
+                    arr[row][col] = incrementInt;
+                }
                 incrementInt++;
                 if(col==9){
                     break;
@@ -113,32 +114,69 @@ public class CA3_Question2
             }
         }
 
+//        System.out.println("Row is: "+row+1);
+    }
+
+    public static void start() {
+        int[][] arr = floodFillStart();
+
+        int row = 0;
+        int column = 0;
+
+        boolean runWhile= true;
 
 
+        while (runWhile) {
+
+            System.out.println("Note: if you enter 0 for either row or column, the simulation will stop.");
 
 
-        System.out.println("Row is: "+row+1);
+            row=validInput(true);
+
+            if(row ==0) break;
+            column=validInput(false);
+
+            if(column ==0) break;
+
+            System.out.println("Starting coordinates are: row " + row + ", column " + column + ".");
+
+            fill(row - 1, column - 1, arr);
+
+            if(row == 0 || column ==0){
+                runWhile = false;
+            }
+        }
 
 
     }
 
-    public static void start()
-    {
-        int[][] arr = floodFillStart();
+    public static int validInput(boolean isRow){
+        int number = 0;
+        boolean runWhile = true;
 
-        int row=0;
-        int column=0;
-        System.out.println("Enter the row number: ");
-        row = key.nextInt();
+        while(runWhile){
+            Scanner keyValid = new Scanner(System.in);
 
-        System.out.println("Enter the row number: ");
-        column = key.nextInt();
+            if(isRow){
+                System.out.println("Enter the row number: ");
+            }else{
+                System.out.println("Enter the column number: ");
+            }
 
-        System.out.println("Starting coordinates are: row " +row +", column "+column+".");
+            if(keyValid.hasNextInt()){
+                number = keyValid.nextInt();
+                if(number <11 && number>=0 ){
+                    runWhile=false;
+                }else{
+                        System.out.println("The number can be from 1 to 10.");
+                }
+            }else{
+                System.out.println("Number has to be integer value.");
+            }
 
-        fill(row-1, column-1, arr);
 
-
+        }
+        return number;
     }
 
 
