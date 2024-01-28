@@ -84,15 +84,40 @@ public class CA3_Question2
 
     private static void pushUnfilledNeighbors(Stack<Pair> stack, int[][] arr, int row, int col, Pair lastPair) {
         int incrementInt = 2;
-        for (int i = 0; i < 20; i++) {
-            col++;
-            stack.push(new Pair(row, col));
-            arr[row][col] = incrementInt;
-            incrementInt++;
-            if(col==9){
-                break;
+        int loopCounter = 1;
+        boolean runWhile=true;
+
+
+        while(runWhile){
+            loopCounter++;
+
+
+
+            for (int i = 0; i < 10; i++) {
+                col++;
+                stack.push(new Pair(row, col));
+                arr[row][col] = incrementInt;
+                incrementInt++;
+                if(col==9){
+                    break;
+                }
+            }
+
+            incrementInt=loopCounter;
+
+            col =-1;
+            row++;
+
+            if(row==10){
+                runWhile=false;
             }
         }
+
+
+
+
+
+        System.out.println("Row is: "+row+1);
 
 
     }
