@@ -19,7 +19,7 @@ public class CA3_Question3
         String singleLine = "";
 
 
-        Map< Integer, String> numberedLinesMap;
+        Map<Integer, String> numberedLinesMap;
         numberedLinesMap = new TreeMap< Integer, String>();
         //I'm using a TreeMap, so I can order the lines later
         //  -> Used a hashMap at first, but it doesn't sort line by numbers and it looks odd.
