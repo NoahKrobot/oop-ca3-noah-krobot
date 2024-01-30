@@ -35,16 +35,19 @@ public class CA3_Question4 {
 
         extractHtmlStack(singleLine);
 
-
-        System.out.println("htmlOpenedStack: ");
-        printStack(htmlOpenedStack);
-        System.out.println("\n\nhtmlClosedStack: ");
-        printStack(htmlClosedStack);
-
-
         System.out.println("\n\nreverseStack: ");
         reverseStackMethod(htmlOpenedStack);
         printStack(reverseStack);
+
+
+        System.out.println("htmlOpenedStack: ");
+        printStack(htmlOpenedStack);
+
+        System.out.println("\n\nhtmlClosedStack: ");
+        printStack(htmlClosedStack);
+        System.out.println("\n\nhtmlClosedStack: ");
+        printStack(htmlClosedStack);
+
 
 
 
@@ -56,7 +59,7 @@ public class CA3_Question4 {
         Stack<String> tempStack = new Stack<>();
         while (!stack.isEmpty()) {
             String element = stack.pop();
-            System.out.println(element);
+            System.out.println("element " + element);
             tempStack.push(element);
         }
         // Restore the original order in the stack
@@ -64,18 +67,6 @@ public class CA3_Question4 {
             stack.push(tempStack.pop());
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void extractHtmlStack (String line){
         //1. check if there is < and > found in the line
@@ -107,8 +98,17 @@ public class CA3_Question4 {
     }
 
     public static void printStack(Stack<String> stack) {
+        Stack<String> tempStack = new Stack<>();
+        String element = "";
         while (stack.size() > 0) {
-            System.out.println(stack.pop());
+            element = stack.pop();
+            System.out.println(element);
+            tempStack.add(element);
+        }
+
+        while (tempStack.size() > 0) {
+            element = tempStack.pop();
+            stack.add(element);
         }
     }
 
@@ -131,7 +131,6 @@ public class CA3_Question4 {
                 System.out.printf("HTML code is valid.");
             }else{
                 System.out.printf("HTML code is invalid.");
-
             }
         }
     }
