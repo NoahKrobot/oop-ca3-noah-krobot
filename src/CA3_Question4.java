@@ -17,7 +17,11 @@ public class CA3_Question4 {
 
     static Stack<String> htmlElementStack = new Stack<String>();
     static Stack<String> htmlOpenedStack = new Stack<String>();
+    static Stack<String> htmlClosedStack = new Stack<String>();
 
+//   htmlOpenedStack: o1 o2 o3
+//   htmlClosedStack:         o3 o2 o1
+//   Therefore, if htmlClosedStack is the revesed one of html open, it is a valid data
 
     public static boolean validate(String filename) throws FileNotFoundException
     {
@@ -32,30 +36,51 @@ public class CA3_Question4 {
         extractHtmlStack(singleLine);
 
 
+        System.out.println("htmlOpenedStack: ");
+        while (htmlOpenedStack.size() > 0)
+        {
+            System.out.println(htmlOpenedStack.pop());
+        }
 
+        System.out.println("\n\nhtmlClosedStack: ");
 
-
+        while (htmlClosedStack.size() > 0)
+        {
+            System.out.println(htmlClosedStack.pop());
+        }
         return false;
     }
 
 
     public static void extractHtmlStack (String line){
-        int counter = 0;
-        int currentPosition= 0;
-        int finalPosition = 0 ;
-        while (counter < line.length()) {
-            currentPosition = line.indexOf('<', counter);
-            finalPosition= line.indexOf('>', currentPosition);
+        //1. check if there is < and > found in the line
+        //2. check if there's "/", and if true add it to different stack
 
-            if (currentPosition != -1 && finalPosition != -1) {
-                String tag = line.substring(currentPosition, finalPosition + 1);
-                System.out.println(tag);
-                htmlElementStack.add(tag);
-                counter = finalPosition + 1;
-            } else {
-                break;
+        System.out.println(line);
+
+        int counter = 0;
+        int openingArrowIndex = 0;
+        int closingArrowIndex =0;
+        String tag = "";
+
+        while(counter < line.length()){
+            openingArrowIndex = line.indexOf('<',counter);
+//            System.out.println(openingArrowIndex);
+            closingArrowIndex = line.indexOf('>',openingArrowIndex);
+//            System.out.println(closingArrowIndex);
+
+            if(openingArrowIndex != -1 || closingArrowIndex !=-1){
+                tag = line.substring(openingArrowIndex+1, closingArrowIndex);
+                if(tag.contains("/")){
+                    htmlClosedStack.add(tag);
+                }else{
+                    htmlOpenedStack.add(tag);
+                }
+                counter = closingArrowIndex + 1;
             }
         }
+
+
     }
 
     /*
