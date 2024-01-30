@@ -15,7 +15,7 @@ public class CA3_Question4 {
 
 
 
-    static Stack<String> htmlElementStack = new Stack<String>();
+    static Stack<String> reverseStack = new Stack<String>();
     static Stack<String> htmlOpenedStack = new Stack<String>();
     static Stack<String> htmlClosedStack = new Stack<String>();
 
@@ -37,19 +37,44 @@ public class CA3_Question4 {
 
 
         System.out.println("htmlOpenedStack: ");
-        while (htmlOpenedStack.size() > 0)
-        {
-            System.out.println(htmlOpenedStack.pop());
-        }
-
+        printStack(htmlOpenedStack);
         System.out.println("\n\nhtmlClosedStack: ");
+        printStack(htmlClosedStack);
 
-        while (htmlClosedStack.size() > 0)
-        {
-            System.out.println(htmlClosedStack.pop());
-        }
-        return false;
+
+        System.out.println("\n\nreverseStack: ");
+        reverseStackMethod(htmlOpenedStack);
+        printStack(reverseStack);
+
+
+
+
+        return htmlClosedStack.equals(reverseStack);
     }
+
+    public static void reverseStackMethod(Stack<String> stack) {
+        Stack<String> tempStack = new Stack<>();
+        while (!stack.isEmpty()) {
+            String element = stack.pop();
+            System.out.println(element);
+            tempStack.push(element);
+        }
+        // Restore the original order in the stack
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     public static void extractHtmlStack (String line){
@@ -68,10 +93,10 @@ public class CA3_Question4 {
 //            System.out.println(openingArrowIndex);
             closingArrowIndex = line.indexOf('>',openingArrowIndex);
 //            System.out.println(closingArrowIndex);
-
             if(openingArrowIndex != -1 || closingArrowIndex !=-1){
                 tag = line.substring(openingArrowIndex+1, closingArrowIndex);
                 if(tag.contains("/")){
+                    tag = line.substring(openingArrowIndex+2, closingArrowIndex);
                     htmlClosedStack.add(tag);
                 }else{
                     htmlOpenedStack.add(tag);
@@ -79,8 +104,12 @@ public class CA3_Question4 {
                 counter = closingArrowIndex + 1;
             }
         }
+    }
 
-
+    public static void printStack(Stack<String> stack) {
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());
+        }
     }
 
     /*
@@ -98,7 +127,12 @@ public class CA3_Question4 {
 //            } else {
 //                System.out.println("This file is invalid");
 //            }
-            validate(fName);
+            if(validate(fName)){
+                System.out.printf("HTML code is valid.");
+            }else{
+                System.out.printf("HTML code is invalid.");
+
+            }
         }
     }
 }
