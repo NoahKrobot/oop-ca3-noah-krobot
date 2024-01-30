@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 /**
@@ -35,9 +36,7 @@ public class CA3_Question4 {
 
         extractHtmlStack(singleLine);
 
-        System.out.println("\n\nreverseStack: ");
-        reverseStackMethod(htmlOpenedStack);
-        printStack(reverseStack);
+
 
 
         System.out.println("htmlOpenedStack: ");
@@ -45,9 +44,11 @@ public class CA3_Question4 {
 
         System.out.println("\n\nhtmlClosedStack: ");
         printStack(htmlClosedStack);
-        System.out.println("\n\nhtmlClosedStack: ");
-        printStack(htmlClosedStack);
 
+
+        System.out.println("\n\nreversedOpenedStack: ");
+        reverseStack=reverseStackMethod(htmlOpenedStack);
+        printStack(reverseStack);
 
 
 
@@ -55,18 +56,23 @@ public class CA3_Question4 {
         return htmlClosedStack.equals(reverseStack);
     }
 
-    public static void reverseStackMethod(Stack<String> stack) {
+    public static  Stack<String> reverseStackMethod(Stack<String> stack) {
         Stack<String> tempStack = new Stack<>();
-        while (!stack.isEmpty()) {
-            String element = stack.pop();
-            System.out.println("element " + element);
-            tempStack.push(element);
+        ArrayList<String> copyStack = new ArrayList<>();
+        String element = "";
+        while (stack.size() > 0) {
+            element = stack.pop();
+            copyStack.add(element);
         }
-        // Restore the original order in the stack
-        while (!tempStack.isEmpty()) {
-            stack.push(tempStack.pop());
+
+        for(int i=0; i<copyStack.size();i++){
+            element = copyStack.get(i);
+            tempStack.add(element);
         }
+        return tempStack;
     }
+
+
 
     public static void extractHtmlStack (String line){
         //1. check if there is < and > found in the line
@@ -121,17 +127,13 @@ public class CA3_Question4 {
     public static void main(String[] args) throws FileNotFoundException {
         String[] files = {"tags_valid.txt", "tags_invalid.txt"};
         for(String fName: files) {
-//            System.out.print(fName +": ");
-//            if (validate(fName)) {
-//                System.out.println("This file is valid");
-//            } else {
-//                System.out.println("This file is invalid");
-//            }
+            System.out.print(fName +": ");
             if(validate(fName)){
                 System.out.printf("HTML code is valid.");
             }else{
                 System.out.printf("HTML code is invalid.");
             }
+
         }
     }
 }
