@@ -64,6 +64,32 @@ public class CA3_Question6
 
 
 
+        int quantityToSell =0;
+        int blockQty =0;
+
+        double profit = 0;
+
+        while (qty > 0 && !shares.isEmpty()) {
+            Block block = shares.remove();
+
+            blockQty = block.getQuantity();
+            if(qty < blockQty){
+                quantityToSell=qty;
+            }else{
+                quantityToSell=blockQty;
+            }
+
+            qty = qty-quantityToSell;
+            profit =profit + quantityToSell * (price - block.getPrice());
+
+            if (quantityToSell < block.getQuantity()) {
+                block.setQuantity(block.getQuantity() - quantityToSell);
+                shares.add(block);
+            }
+        }
+
+        System.out.println("Profit = " + profit);
+
     }
 
     public static class Block {
@@ -93,7 +119,10 @@ public class CA3_Question6
 
         @Override
         public String toString() {
-            return "Block [quantity=" + quantity + ", price=" + price + "]";
+            return "Block{" +
+                    "quantity=" + quantity +
+                    ", price=" + price +
+                    '}';
         }
 
     }
