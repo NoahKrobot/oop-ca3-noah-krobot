@@ -31,16 +31,18 @@ public class CA3_Question6
             command = in.next();
             if(command.equalsIgnoreCase("buy"))
             {
-                int qty = in.nextInt();
-                double price = in.nextDouble();
+                System.out.println("quantity: ");
+                int qty = validInt();
+                System.out.println("price: ");
+                double price = validDouble();
                 Block addBlock = new Block(qty, price);
                 shares.add(addBlock);
 
             }
             else if(command.equals("sell"))
             {
-                int qty = in.nextInt();
-                double price = in.nextDouble();
+                int qty = validInt();
+                double price = validDouble();
 
                 seellShares(qty, price, shares);
             }
@@ -125,7 +127,40 @@ public class CA3_Question6
                     ", price=" + price +
                     '}';
         }
+    }
 
+
+
+    public static int validInt(){
+        int number = 0;
+        boolean runWhile = true;
+
+        while(runWhile){
+            Scanner keyValid = new Scanner(System.in);
+            if(keyValid.hasNextInt()){
+                number = keyValid.nextInt();
+                    runWhile=false;
+            }else{
+                System.out.println("Number has to be integer value.");
+            }
+        }
+        return number;
+    }
+
+    public static double validDouble(){
+        double number = 0;
+        boolean runWhile = true;
+
+        while(runWhile){
+            Scanner keyValidDouble = new Scanner(System.in);
+            if(keyValidDouble.hasNextDouble()){
+                number = keyValidDouble.nextDouble();
+                runWhile=false;
+            }else{
+                System.out.println("Number has to be double value.");
+            }
+        }
+        return number;
     }
 
 }
