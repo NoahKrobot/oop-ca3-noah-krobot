@@ -26,6 +26,7 @@ public class CA3_Question5
         String singleCommand = "";
         String flightNumber = "";
         boolean runWhile = true;
+        String removed = "";
 
         while(runWhile){
             flightNumber = " ";
@@ -42,26 +43,28 @@ public class CA3_Question5
             flightNumber = enterFlight(flightSet);
             landingQueue.add(flightNumber);
         }else if(singleCommand.equals("next")){
+            System.out.println("flight numb: "+flightNumber);
             clearArrayList();
              if (landingQueue.isEmpty()) {
                  if(takeoffQueue.isEmpty()){
                      System.out.println("There's no planes in takeoff or landing queue.");
                  }else{
-                     System.out.println("Plane " + flightNumber + " is taking off.");
-                     takeoffQueue.remove(flightNumber);
+                     removed= takeoffQueue.remove();
+                     System.out.println("Plane " + removed + " is taking off.");
                  }
              }else {
-                 landingQueue.remove(flightNumber);
-                 System.out.println("Plane " + flightNumber + " is landing.");
+                 removed= landingQueue.remove();
+                 System.out.println("Plane " + removed + " is landing.");
              }
 
 
         }else if(singleCommand.equals("quit")){
             runWhile = false;
-
         }
+
             System.out.println("Takeoff Queue: " + takeoffQueue);
             System.out.println("Landing Queue: " + landingQueue);
+
         }
 
 
