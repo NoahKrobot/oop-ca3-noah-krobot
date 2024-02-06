@@ -28,6 +28,9 @@ public class CA3_Question7
                 //block1
                 //symbol2
                 //block2           -done
+
+        Queue<Block> shares = new LinkedList<>();
+
         Map<String, Queue<Block>> symbolShares = new HashMap<>();
         Scanner in = new Scanner(System.in);
         String command = "";
@@ -40,15 +43,14 @@ public class CA3_Question7
                 System.out.println("symbol: ");
                 String symbol = in.next();
 
-                Queue<Block> newShares = new LinkedList<>();
 
                     System.out.println("quantity: ");
                     int qty = validInt();
                     System.out.println("price: ");
                     double price = validDouble();
                     Block addBlock = new Block(qty, price);
-                    newShares.add(addBlock);
-                    symbolShares.put(symbol, newShares);
+                    shares.add(addBlock);
+                    symbolShares.put(symbol, shares);
 
             } else if (command.equalsIgnoreCase("sell")) {
                 System.out.println("symbol: ");
@@ -65,15 +67,10 @@ public class CA3_Question7
 
             System.out.println("\n***** SHARES *****\n");
 
-            // Display all shares
-            for (Map.Entry<String, Queue<Block>> entry : symbolShares.entrySet()) {
-                String symbol = entry.getKey();
-                Queue<Block> shares = entry.getValue();
-
-                System.out.println("Symbol: " + symbol);
-                for (Block block : shares) {
-                    System.out.println(block.toString());
-                }
+            Set<String> keySet = symbolShares.keySet();
+            for (String key : keySet) {
+                Queue<Block> value = symbolShares.get(key);
+                System.out.println("Symbol: "+key +" "+ value);
             }
 
         } while (!command.equalsIgnoreCase("quit"));
