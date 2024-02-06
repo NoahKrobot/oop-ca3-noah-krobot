@@ -55,39 +55,15 @@ public class CA3_Question6
     }
 
     public static void seellShares(int qty, double price,Queue<Block> shares){
-        int remainingQuantity=0;
-        double profit = 0;
-        int counter = 1;
-        for(Block block: shares){
+        //1. qty cant be 0 and shares cant be empty
+        //2. if qty is smaller than block quantity, put qty value to quantityToSell variable
+            //reversed if else
+        //3. set the new value of qty
+        //4. implement profit = profit + quantityToSell *(price - blockPrice)
+        //5. it should stop if qty is 0 or less - while
 
-            if(counter==1){
 
-            qty = qty - block.getQuantity();
-            price = price-block.getPrice();
 
-            if(qty<=0){
-                shares.remove(block);
-                remainingQuantity=qty*-1;
-            }else{
-                remainingQuantity= qty-block.getQuantity();
-            }
-            }else{
-                remainingQuantity = remainingQuantity - block.getQuantity();
-                price = price-block.getPrice();
-
-                if(qty<=0){
-                    shares.remove(block);
-                    remainingQuantity=qty*-1;
-                }else{
-                    remainingQuantity= qty-block.getQuantity();
-                }
-            }
-
-            profit = remainingQuantity*price;
-            counter++;
-        }
-
-        System.out.println("Profit =" +profit);
     }
 
     public static class Block {
