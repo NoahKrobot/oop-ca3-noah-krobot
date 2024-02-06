@@ -119,6 +119,7 @@ public class CA3_Question6
 
         @Override
         public String toString() {
+
             return "Block{" +
                     "quantity=" + quantity +
                     ", price=" + price +
