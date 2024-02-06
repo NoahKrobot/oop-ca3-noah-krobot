@@ -2,6 +2,7 @@
 
 
 
+
 import java.util.*;
 
 /**
@@ -22,6 +23,11 @@ public class CA3_Question7
     quit
      */
     public static void main(String[] args) {
+        //1. get that the output is:
+                //symbol1
+                //block1
+                //symbol2
+                //block2           -done
         Map<String, Queue<Block>> symbolShares = new HashMap<>();
         Scanner in = new Scanner(System.in);
         String command = "";
@@ -31,7 +37,18 @@ public class CA3_Question7
             command = in.next();
 
             if (command.equalsIgnoreCase("buy")) {
+                System.out.println("symbol: ");
+                String symbol = in.next();
 
+                Queue<Block> newShares = new LinkedList<>();
+
+                    System.out.println("quantity: ");
+                    int qty = validInt();
+                    System.out.println("price: ");
+                    double price = validDouble();
+                    Block addBlock = new Block(qty, price);
+                    newShares.add(addBlock);
+                    symbolShares.put(symbol, newShares);
 
             } else if (command.equalsIgnoreCase("sell")) {
                 System.out.println("symbol: ");
