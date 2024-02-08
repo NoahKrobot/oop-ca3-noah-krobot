@@ -21,7 +21,8 @@ public class CA3_Question8 {
 
     //1. loop thru the equation
     //2. if char is number -> put it to the stack
-    //4. if char is ( create
+    //3. if char is ( add it to operationStack
+    //4. if the char is ), check if the last operator was not ( or )
 
     /*
         Reads in an equation from the user
@@ -34,7 +35,7 @@ public class CA3_Question8 {
 
 
         Stack<Integer> numberStack = new Stack<>();
-        Stack<Integer> operationStack = new Stack<>();
+        Stack<String> operationStack = new Stack<>();
 
             String currentCharacterString = "";
            char currentCharacter = 0;
@@ -63,14 +64,83 @@ public class CA3_Question8 {
 //                System.out.println(tempStack.pop());
 //            }
 
+            if (currentCharacterString.equals("(")) {
+                operationStack.push(currentCharacterString);
+                lastCharIsNumber = false;
+            }else if(currentCharacterString.equals(")")){
+                if(!operationStack.peek().equals("(")  && !operationStack.peek().equals(")")){
+//                  do something
+                }
+
+                operationStack.push(currentCharacterString);
+                lastCharIsNumber = false;
+            } else if (currentCharacterString.equals("+")) {
+                lastCharIsNumber = false;
+                handleOperator("+", 1, operationStack, numberStack);
+            } else if (currentCharacterString.equals("-")) {
+                lastCharIsNumber = false;
+                handleOperator("-", 1, operationStack, numberStack);
+            } else if (currentCharacterString.equals("*")) {
+                lastCharIsNumber = false;
+                handleOperator("*", 2, operationStack, numberStack);
+            } else if (currentCharacterString.equals("/")) {
+                lastCharIsNumber = false;
+                handleOperator("/", 2, operationStack, numberStack);
+            }
 
 
+            if (i == equation.length() - 1)
+                while (!operationStack.isEmpty()) {
+                    evaluateOperations( operationStack, numberStack);
+            }
         }
 
-
-
-
-
-        System.out.println("Numbers in the stack: " + numberStack);
+        System.out.println("Result: " + numberStack.pop());
     }
+
+    private static void handleOperator(String operator, int precedence, Stack<String> operationStack, Stack<Integer> numberStack) {
+        //1. give proper precedence to operators
+        //2. check if the precedence is higher for * and /,
+        //then
+
+
+        int operatorPrecedenceTopOfStack;
+        int operatorPrecedenceNotOnStack;
+
+        if (!operationStack.isEmpty()) {
+            String operatorTopOfStack = operationStack.peek();
+
+            if (operatorTopOfStack.equals("*") || operatorTopOfStack.equals("/")) {
+                operatorPrecedenceTopOfStack = 2;
+            } else {
+                operatorPrecedenceTopOfStack = 1;
+            }
+
+            if (precedence == 2) {
+                operatorPrecedenceNotOnStack = 2;
+            } else {
+                operatorPrecedenceNotOnStack = 1;
+            }
+
+            if (operatorPrecedenceTopOfStack > operatorPrecedenceNotOnStack) {
+                evaluateOperations( operationStack, numberStack);
+            }
+        }
+        operationStack.push(operator);
+    }
+
+    public static void evaluateOperations(Stack<String> operationStack,Stack<Integer> numberStack) {
+        int numToGoOnStack;
+        int first = numberStack.pop();
+        int second = numberStack.pop();
+        String operator = operationStack.pop();
+        numToGoOnStack = switch (operator) {
+            case "+" -> first + second;
+            case "-" -> second - first;
+            case "*" -> first * second;
+            default -> second / first;
+        };
+        numberStack.push(numToGoOnStack);
+    }
+
 }
