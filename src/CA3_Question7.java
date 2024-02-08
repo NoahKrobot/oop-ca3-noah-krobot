@@ -1,8 +1,6 @@
 //Tutorial: containsKey -> https://www.geeksforgeeks.org/hashmap-containskey-method-in-java/
 
 
-
-
 import java.util.*;
 
 /**
@@ -12,8 +10,6 @@ import java.util.*;
 
 public class CA3_Question7
 {
-
-
     /*
     Will repeatedly ask the user to enter the commands in the format
     buy qty price
@@ -41,16 +37,26 @@ public class CA3_Question7
 
             if (command.equalsIgnoreCase("buy")) {
                 System.out.println("symbol: ");
-                String symbol = in.next();
+                String symbol = in.next().trim();
 
 
                     System.out.println("quantity: ");
                     int qty = validInt();
                     System.out.println("price: ");
                     double price = validDouble();
+
                     Block addBlock = new Block(qty, price);
-                    shares.add(addBlock);
-                    symbolShares.put(symbol, shares);
+
+                    if(symbolShares.containsKey(symbol)){
+                        Queue<Block> symbolBlocks = symbolShares.get(symbol);
+                        symbolBlocks.add(addBlock);
+                    }else{
+                        Queue<Block> stocks = new LinkedList<>();
+                        stocks.add(addBlock);
+                        symbolShares.put(symbol, stocks);
+                    }
+//                    shares.add(addBlock);
+//                    symbolShares.put(symbol, shares);
 
             } else if (command.equalsIgnoreCase("sell")) {
                 System.out.println("symbol: ");
