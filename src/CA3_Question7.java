@@ -60,7 +60,16 @@ public class CA3_Question7
 
             } else if (command.equalsIgnoreCase("sell")) {
                 System.out.println("symbol: ");
-                String symbol = in.next();
+                String symbol = in.next().trim();
+                System.out.println("quantity: ");
+                int qty = validInt();
+                System.out.println("price: ");
+                double price = validDouble();
+
+                Queue<Block> symbolBlocks = null;
+
+                sellShares(symbol, qty, price, symbolBlocks);
+
 
                 boolean doesSymbolExists = symbolShares.containsKey(symbol);
 
@@ -82,7 +91,41 @@ public class CA3_Question7
         } while (!command.equalsIgnoreCase("quit"));
     }
 
-    public static void sellShares(String symbol, Map<String, Queue<Block>> symbolShares) {
+    public static void sellShares(String symbol, int qty, double price,   Queue<Block> symbolBlocks) {
+        //1. qty cant be 0 and shares cant be empty
+        //2. if qty is smaller than block quantity, put qty value to quantityToSell variable
+        //reversed if else
+        //3. set the new value of qty
+        //4. implement profit = profit + quantityToSell *(price - blockPrice)
+        //5. it should stop if qty is 0 or less - while
+
+
+
+        int quantityToSell =0;
+        int blockQty =0;
+
+        double profit = 0;
+
+        while (qty > 0 && !shares.isEmpty()) {
+            CA3_Question6.Block block = shares.remove();
+
+            blockQty = block.getQuantity();
+            if(qty < blockQty){
+                quantityToSell=qty;
+            }else{
+                quantityToSell=blockQty;
+            }
+
+            qty = qty-quantityToSell;
+            profit =profit + quantityToSell * (price - block.getPrice());
+
+            if (quantityToSell < block.getQuantity()) {
+                block.setQuantity(block.getQuantity() - quantityToSell);
+                shares.add(block);
+            }
+        }
+
+        System.out.println("Profit = " + profit);
 
     }
 
