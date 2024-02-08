@@ -91,7 +91,7 @@ public class CA3_Question8 {
 
             if (i == equation.length() - 1)
                 while (!operationStack.isEmpty()) {
-                    evaluateOperations( operationStack, numberStack);
+                    runOperations( operationStack, numberStack);
             }
         }
 
@@ -123,24 +123,33 @@ public class CA3_Question8 {
             }
 
             if (operatorPrecedenceTopOfStack > operatorPrecedenceNotOnStack) {
-                evaluateOperations( operationStack, numberStack);
+                runOperations( operationStack, numberStack);
             }
         }
         operationStack.push(operator);
     }
 
-    public static void evaluateOperations(Stack<String> operationStack,Stack<Integer> numberStack) {
-        int numToGoOnStack;
-        int first = numberStack.pop();
-        int second = numberStack.pop();
-        String operator = operationStack.pop();
-        numToGoOnStack = switch (operator) {
-            case "+" -> first + second;
-            case "-" -> second - first;
-            case "*" -> first * second;
-            default -> second / first;
-        };
-        numberStack.push(numToGoOnStack);
+    public static void runOperations(Stack<String> operationStack, Stack<Integer> numberStack) {
+        //1. get numbers
+        //2. get result for each action
+
+        int number1 = numberStack.pop();
+        int number2 = numberStack.pop();
+        int miniResult = 0;
+        String singleOperaton = operationStack.pop();
+
+        if ("+".equals(singleOperaton)) {
+            miniResult = number1 + number2;
+        } else if ("-".equals(singleOperaton)) {
+            miniResult = number2 - number1;
+        } else if ("*".equals(singleOperaton)) {
+            miniResult = number1 * number2;
+        } else if ("/".equals(singleOperaton)) {
+            miniResult = number2 / number1;
+        }
+
+        numberStack.push(miniResult);
     }
+
 
 }
