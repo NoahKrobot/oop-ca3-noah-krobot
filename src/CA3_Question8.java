@@ -72,7 +72,7 @@ public class CA3_Question8 {
                 if(!operationStack.peek().equals("(")  && !operationStack.peek().equals(")")){
                   runOperations(operationStack,numberStack);
                 }
-                operationStack.push(currentCharacterString);
+                operationStack.pop();
             } else if (currentCharacterString.equals("+")) {
                 lastCharIsNumber = false;
                 handleOperator("+", 1, operationStack, numberStack);
