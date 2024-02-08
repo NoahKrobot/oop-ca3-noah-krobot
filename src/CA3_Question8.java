@@ -65,15 +65,14 @@ public class CA3_Question8 {
 //            }
 
             if (currentCharacterString.equals("(")) {
-                operationStack.push(currentCharacterString);
                 lastCharIsNumber = false;
+                operationStack.push(currentCharacterString);
             }else if(currentCharacterString.equals(")")){
-                if(!operationStack.peek().equals("(")  && !operationStack.peek().equals(")")){
-//                  do something
-                }
-
-                operationStack.push(currentCharacterString);
                 lastCharIsNumber = false;
+                if(!operationStack.peek().equals("(")  && !operationStack.peek().equals(")")){
+                  runOperations(operationStack,numberStack);
+                }
+                operationStack.push(currentCharacterString);
             } else if (currentCharacterString.equals("+")) {
                 lastCharIsNumber = false;
                 handleOperator("+", 1, operationStack, numberStack);
@@ -87,7 +86,6 @@ public class CA3_Question8 {
                 lastCharIsNumber = false;
                 handleOperator("/", 2, operationStack, numberStack);
             }
-
 
             if (i == equation.length() - 1)
                 while (!operationStack.isEmpty()) {
