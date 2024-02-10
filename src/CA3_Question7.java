@@ -25,7 +25,6 @@ public class CA3_Question7
                 //symbol2
                 //block2           -done
 
-        Queue<Block> shares = new LinkedList<>();
 
         Map<String, Queue<Block>> symbolShares = new HashMap<>();
         Scanner in = new Scanner(System.in);
@@ -69,11 +68,6 @@ public class CA3_Question7
                 Queue<Block> symbolBlocks = null;
 
                 int totalBlockStocks = 0;
-                double spent = 0;
-                int remainingQuantity = qty;
-
-
-
                 int quantityToSell =0;
                 int blockQty =0;
 
