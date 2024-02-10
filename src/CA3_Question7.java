@@ -98,11 +98,17 @@ public class CA3_Question7
                         qty = qty-quantityToSell;
                         profit =profit + quantityToSell * (price - block.getPrice());
 
+//                        System.out.println("Quantitiy for block: " +block.getQuantity());
+//                        System.out.println("Quantitiy to be sold: " +quantityToSell);
+
                         if (quantityToSell < block.getQuantity()) {
                             block.setQuantity(block.getQuantity() - quantityToSell);
                             symbolBlocks.add(block);
+                        }else{
+                            System.out.println("You want to sell a bigger amount than you have. Therefore, you will only sell " + block.getQuantity()+" stocks.");
 
                         }
+
                     }
 
                     System.out.println("Profit: " + profit);
