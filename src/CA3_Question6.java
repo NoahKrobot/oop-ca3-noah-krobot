@@ -87,8 +87,6 @@ public class CA3_Question6
             if (quantityToSell < block.getQuantity()) {
                 block.setQuantity(block.getQuantity() - quantityToSell);
                 shares.add(block);
-            }else{
-                System.out.println("You want to sell a bigger amount than you have. Therefore, you will only sell " + block.getQuantity()+" stocks.");
             }
         }
 
